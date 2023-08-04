@@ -1,2 +1,0 @@
-C:\Users\Exdee\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt
-C:\Users\Exdee\JUCE\proj\TestSynth\Builds\Android\app\CMakeLists.txt

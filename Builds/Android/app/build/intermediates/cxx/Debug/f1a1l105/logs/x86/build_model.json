@@ -1,0 +1,191 @@
+{
+  "abi": "X86",
+  "info": {
+    "abi": "X86",
+    "bitness": 32,
+    "deprecated": false,
+    "default": true
+  },
+  "cxxBuildFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\.cxx\\Debug\\f1a1l105\\x86",
+  "soFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build\\intermediates\\cxx\\Debug\\f1a1l105\\obj\\x86",
+  "soRepublishFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build\\intermediates\\cmake\\debug_Debug\\obj\\x86",
+  "abiPlatformVersion": 29,
+  "cmake": {
+    "effectiveConfiguration": {
+      "inheritEnvironments": [],
+      "variables": []
+    }
+  },
+  "variant": {
+    "buildSystemArgumentList": [
+      "-DANDROID_TOOLCHAIN\u003dclang",
+      "-DANDROID_PLATFORM\u003dandroid-29",
+      "-DANDROID_STL\u003dc++_static",
+      "-DANDROID_CPP_FEATURES\u003dexceptions rtti",
+      "-DANDROID_ARM_MODE\u003darm",
+      "-DANDROID_ARM_NEON\u003dTRUE",
+      "-DCMAKE_CXX_STANDARD\u003d17",
+      "-DCMAKE_CXX_EXTENSIONS\u003dOFF",
+      "-DJUCE_BUILD_CONFIGURATION\u003dDEBUG"
+    ],
+    "cFlagsList": [
+      "-O0"
+    ],
+    "cppFlagsList": [
+      "-O0"
+    ],
+    "variantName": "debug_Debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "module": {
+      "cxxFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\.cxx",
+      "intermediatesBaseFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build\\intermediates",
+      "intermediatesFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build\\intermediates\\cxx",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app",
+      "moduleBuildFile": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build.gradle",
+      "makeFile": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "ndkFolder": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653",
+      "ndkVersion": "25.2.9519653",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkMetaPlatforms": {
+        "min": 19,
+        "max": 33,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29,
+          "R": 30,
+          "S": 31,
+          "Sv2": 32,
+          "Tiramisu": 33
+        }
+      },
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "cmakeToolchainFile": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653\\build\\cmake\\android.toolchain.cmake",
+      "cmake": {
+        "isValidCmakeAvailable": true,
+        "cmakeExe": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\cmake.exe",
+        "minimumCmakeVersion": "3.22.1"
+      },
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      },
+      "project": {
+        "rootBuildGradleFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android",
+        "sdkFolder": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": false
+      },
+      "outputOptions": [],
+      "ninjaExe": "C:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe"
+    },
+    "prefabClassPaths": [],
+    "prefabPackages": [],
+    "prefabPackageConfigurations": [],
+    "stlType": "c++_static",
+    "optimizationTag": "Debug"
+  },
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "prefabFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\.cxx\\Debug\\f1a1l105\\prefab\\x86",
+  "isActiveAbi": true,
+  "fullConfigurationHash": "f1a1l1050wg1x6k757m1z6t4v17r3h1f5t4w173cn4b6l2n1g2a6p3o73",
+  "configurationArguments": [
+    "-HC:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app",
+    "-DCMAKE_SYSTEM_NAME\u003dAndroid",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON",
+    "-DCMAKE_SYSTEM_VERSION\u003d29",
+    "-DANDROID_ABI\u003dx86",
+    "-DCMAKE_ANDROID_ARCH_ABI\u003dx86",
+    "-DANDROID_NDK\u003dC:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653",
+    "-DCMAKE_ANDROID_NDK\u003dC:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653",
+    "-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\ndk\\25.2.9519653\\build\\cmake\\android.toolchain.cmake",
+    "-DCMAKE_MAKE_PROGRAM\u003dC:\\Users\\Exdee\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-DCMAKE_C_FLAGS\u003d-O0",
+    "-DCMAKE_CXX_FLAGS\u003d-O0",
+    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dC:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build\\intermediates\\cxx\\Debug\\f1a1l105\\obj\\x86",
+    "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dC:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build\\intermediates\\cxx\\Debug\\f1a1l105\\obj\\x86",
+    "-DCMAKE_BUILD_TYPE\u003dDebug",
+    "-BC:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\.cxx\\Debug\\f1a1l105\\x86",
+    "-GNinja",
+    "-DANDROID_TOOLCHAIN\u003dclang",
+    "-DANDROID_PLATFORM\u003dandroid-29",
+    "-DANDROID_STL\u003dc++_static",
+    "-DANDROID_CPP_FEATURES\u003dexceptions rtti",
+    "-DANDROID_ARM_MODE\u003darm",
+    "-DANDROID_ARM_NEON\u003dTRUE",
+    "-DCMAKE_CXX_STANDARD\u003d17",
+    "-DCMAKE_CXX_EXTENSIONS\u003dOFF",
+    "-DJUCE_BUILD_CONFIGURATION\u003dDEBUG"
+  ],
+  "intermediatesParentFolder": "C:\\Users\\Exdee\\JUCE\\proj\\TestSynth\\Builds\\Android\\app\\build\\intermediates\\cxx\\Debug\\f1a1l105"
+}

@@ -2,7 +2,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "MainComponent.h"
+#include "UI/MainComponent.h"
 
 class TestSynthAudioProcessorEditor : public juce::AudioProcessorEditor {
 public:

@@ -1,7 +1,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "SynthSound.h"
-#include "SynthVoice.h"
+#include "Data/SynthSound.h"
+#include "Data/SynthVoice.h"
 
 TestSynthAudioProcessor::TestSynthAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations

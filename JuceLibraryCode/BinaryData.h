@@ -9,7 +9,7 @@
 namespace BinaryData
 {
     extern const char*   NativeApp_java;
-    const int            NativeApp_javaSize = 3086;
+    const int            NativeApp_javaSize = 2667;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
     const int namedResourceListSize = 1;

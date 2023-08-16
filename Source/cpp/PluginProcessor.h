@@ -1,5 +1,6 @@
 #pragma once
 #include <JuceHeader.h>
+#include "Data/FilterData.h"
 
 class TestSynthAudioProcessor : public juce::AudioProcessor
                             #if JucePlugin_Enable_ARA
@@ -44,5 +45,6 @@ private:
     juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
     
     juce::Synthesiser synth;
+    FilterData filter;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TestSynthAudioProcessor)
 };

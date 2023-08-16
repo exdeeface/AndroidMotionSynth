@@ -7,7 +7,6 @@ public:
 	void setWaveType(const int choice);
 	void getNextAudioBlock(juce::dsp::AudioBlock<float>& audioBlock);
 	void setWaveFrequency(const int midiNoteNumber);
-	void setFmParams(const float frequency, const float depth);
 
 private:
 	juce::dsp::Oscillator<float> fmOsc { [](float x) { return std::sin(x); }};

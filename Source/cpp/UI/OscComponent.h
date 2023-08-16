@@ -4,7 +4,7 @@
 class OscComponent : public juce::Component
 {
 public:
-    OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::String waveType);
+    OscComponent(juce::AudioProcessorValueTreeState& apvts);
     ~OscComponent() override;
 
     void paint (juce::Graphics&) override;

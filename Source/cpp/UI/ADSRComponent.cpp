@@ -1,24 +1,12 @@
 #include <JuceHeader.h>
 #include "ADSRComponent.h"
 
-#if defined(JUCE_ANDROID)
-    #include "jni.h"
-    #include <android/log.h>
-
-    #define TAG "STUPORVILLAIN"
-    #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,    TAG, __VA_ARGS__)
-    #define LOGW(...) __android_log_print(ANDROID_LOG_WARN,     TAG, __VA_ARGS__)
-    #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,     TAG, __VA_ARGS__)
-    #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,    TAG, __VA_ARGS__)
-#endif
-
-ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts) {
+ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts) : filterComponent(apvts) {
     setSliderParams(gainSlider);
     setSliderParams(attackSlider);
     setSliderParams(decaySlider);
     setSliderParams(sustainSlider);
     setSliderParams(releaseSlider);
-
     setSliderParams(pitchSlider);
 
     gainSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "GAIN", gainSlider);
@@ -28,6 +16,8 @@ ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts) {
     releaseSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "RELEASE", releaseSlider);
 
     releaseSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "PITCH", pitchSlider);
+
+    addAndMakeVisible(&filterComponent);
 }
 
 ADSRComponent::~ADSRComponent() {
@@ -42,13 +32,14 @@ void ADSRComponent::resized() {
     const auto padding = 5;
     const auto bounds = getLocalBounds().reduced(padding * 4);
 
-    const auto sliderWidth = bounds.getWidth() / 2;
+    const auto sliderWidth = bounds.getWidth() / 4;
     const auto sliderHeight = bounds.getHeight();
     const auto sliderStartX = padding;
     const auto sliderStartY = padding * 4;
 
     gainSlider.setBounds(sliderStartX + padding * 2, sliderStartY, sliderWidth, sliderHeight);
     pitchSlider.setBounds(gainSlider.getRight() + padding, sliderStartY, sliderWidth, sliderHeight);
+    filterComponent.setBounds(pitchSlider.getRight() + padding, sliderStartY, sliderWidth * 2, sliderHeight);
 }
 
 /*

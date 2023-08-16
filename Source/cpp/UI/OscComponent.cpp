@@ -1,7 +1,7 @@
 #include <JuceHeader.h>
 #include "OscComponent.h"
 
-OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::String waveType) {
+OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts) {
     juce::StringArray choices {"Sin", "Saw", "Sqr"};
     oscWaveSelector.addItemList(choices, 1);
     oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "OSC", oscWaveSelector);

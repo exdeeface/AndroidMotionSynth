@@ -3,23 +3,22 @@
 
 MainComponent::MainComponent(TestSynthAudioProcessor &ap) : audioProcessor(ap),
                                                             adsrComponent(audioProcessor.apvts),
-                                                            oscComponent(audioProcessor.apvts, "OSC"),
-                                                            playComponent(ap) {
+                                                            oscComponent(audioProcessor.apvts),
+                                                            playComponent(ap),
+                                                            calibrateComponent(*this) {
     addAndMakeVisible(&adsrComponent);
     addAndMakeVisible(&oscComponent);
+    addAndMakeVisible(&calibrateComponent);
     addAndMakeVisible(&playComponent);
 
 #if defined(JUCE_ANDROID)
-    //motionManager.start();
     startTimerHz(200);
 #endif
 
 }
 
 MainComponent::~MainComponent() {
-#if defined(JUCE_ANDROID)
-    //motionManager.stop();
-#endif
+
 }
 
 void MainComponent::paint (juce::Graphics& g) {
@@ -33,7 +32,11 @@ void MainComponent::resized() {
     adsrComponent.setBounds(adsrBounds);
     auto oscBounds = getLocalBounds();
     oscBounds.setHeight(100);
+    oscBounds.setWidth(getWidth()/2);
     oscComponent.setBounds(oscBounds);
+    auto calibrateBounds = oscBounds;
+    calibrateBounds.setX(oscBounds.getRight());
+    calibrateComponent.setBounds(calibrateBounds);
     auto playBounds = getLocalBounds().reduced(10);
     playBounds.setHeight(getHeight() / 10 * 2.5);
     playBounds.setY(getHeight() / 10 * 7);
@@ -58,7 +61,6 @@ void MainComponent::resized() {
 
 void MainComponent::timerCallback() {
 #if defined(JUCE_ANDROID)
-
     JNIEnv* jvm = juce::getEnv();
     jclass juce_app = jvm->FindClass("com/me/NativeAndroid/NativeApp");
 
@@ -67,13 +69,30 @@ void MainComponent::timerCallback() {
     rotZ = Java_com_rmsl_juce_JuceApp_getYaw(jvm, juce_app);
 
     const juce::NormalisableRange<float> sourceX {-juce::MathConstants<float>::halfPi, juce::MathConstants<float>::halfPi};
-    float pitchToGain = sourceX.convertTo0to1(rotX);
-    adsrComponent.gainSlider.setValue(pitchToGain - 0.10f);
-
     const juce::NormalisableRange<float> sourceY {-juce::MathConstants<float>::pi, juce::MathConstants<float>::pi};
+    const juce::NormalisableRange<float> sourceZ {-juce::MathConstants<float>::pi, juce::MathConstants<float>::pi};
+
+    const juce::NormalisableRange<float> targetX {20.0f, 20000.0f, 0.1f, 0.6f};
     const juce::NormalisableRange<float> targetY {-1.0f, 1.0f};
-    const juce::NormalisableRange<float> targetYToWhatever {0, 16383};
-    float yh = targetY.convertFrom0to1(sourceY.convertTo0to1(rotY));
-    adsrComponent.pitchSlider.setValue(yh);
+    const juce::NormalisableRange<float> targetZ {0.0f, 10.0f};
+
+    adsrComponent.filterComponent.cutoffSlider.setValue(targetX.convertFrom0to1(sourceX.convertTo0to1(rotX)));
+    adsrComponent.pitchSlider.setValue(targetY.convertFrom0to1(sourceY.convertTo0to1(rotY)));
+
+    float modRotZ = rotZ - zOffset;
+
+    if (modRotZ > juce::MathConstants<float>::pi) {
+        float delta = modRotZ - juce::MathConstants<float>::pi;
+        modRotZ = -juce::MathConstants<float>::pi + delta;
+    } else if (modRotZ < -juce::MathConstants<float>::pi) {
+        float delta = modRotZ + juce::MathConstants<float>::pi;
+        modRotZ = juce::MathConstants<float>::pi + delta;
+    }
+
+    adsrComponent.filterComponent.resonanceSlider.setValue(targetZ.convertFrom0to1(sourceZ.convertTo0to1(modRotZ)));
 #endif
+}
+
+void MainComponent::resetOrientation() {
+    zOffset = rotZ;
 }

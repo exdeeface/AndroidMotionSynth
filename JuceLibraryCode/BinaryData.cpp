@@ -30,9 +30,7 @@ static const unsigned char temp_binary_data_0[] =
 "    private final float[] accelerometerReading = new float[3];\r\n"
 "    private final float[] magnetometerReading = new float[3];\r\n"
 "    private final float[] rotationMatrix = new float[9];\r\n"
-"    private final float[] orientationAngles = new float[3];\r\n"
-"\r\n"
-"    static float pitch, roll, yaw = 0.00f;\r\n"
+"    private static final float[] orientationAngles = new float[3];\r\n"
 "\r\n"
 "    SensorManager sensorManager;\r\n"
 "\r\n"
@@ -43,14 +41,12 @@ static const unsigned char temp_binary_data_0[] =
 "\r\n"
 "        Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);\r\n"
 "        if (accelerometer != null) {\r\n"
-"            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_UI);\r\n"
-"            //sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);\r\n"
+"            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST, SensorManager.SENSOR_DELAY_UI);\r\n"
 "        }\r\n"
 "\r\n"
 "        Sensor magneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);\r\n"
 "        if (magneticField != null) {\r\n"
-"            sensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_UI);\r\n"
-"            //sensorManager.registerListener(MainActivity.this, magneticField, SensorManager.SENSOR_DELAY_FASTEST);\r\n"
+"            sensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_FASTEST, SensorManager.SENSOR_DELAY_UI);\r\n"
 "        }\r\n"
 "\r\n"
 "        Log.i(TAG, \"onCreate: sensor manager started.\");\r\n"
@@ -77,16 +73,11 @@ static const unsigned char temp_binary_data_0[] =
 "    public void updateOrientationAngles() {\r\n"
 "        SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading);\r\n"
 "        SensorManager.getOrientation(rotationMatrix, orientationAngles);\r\n"
-"\r\n"
-"        pitch = orientationAngles[1];\r\n"
-"        roll = orientationAngles[2];\r\n"
-"        yaw = orientationAngles[0];\r\n"
-"        Log.i(TAG, \"updateOrientationAngles: THIS IS IN NATIVEapp.JAVA oops\");\r\n"
 "    }\r\n"
 "\r\n"
-"    public static float getPitch() { return pitch; }\r\n"
-"    public static float getRoll() { return roll; }\r\n"
-"    public static float getYaw() { return yaw; }\r\n"
+"    public static float getPitch() { return orientationAngles[1]; }\r\n"
+"    public static float getRoll() { return orientationAngles[2]; }\r\n"
+"    public static float getYaw() { return orientationAngles[0]; }\r\n"
 "}\r\n";
 
 const char* NativeApp_java = (const char*) temp_binary_data_0;
@@ -103,7 +94,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
 
     switch (hash)
     {
-        case 0x21d08ed7:  numBytes = 3086; return NativeApp_java;
+        case 0x21d08ed7:  numBytes = 2667; return NativeApp_java;
         default: break;
     }
 

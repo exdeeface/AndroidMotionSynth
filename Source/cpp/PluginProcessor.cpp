@@ -15,7 +15,7 @@ TestSynthAudioProcessor::TestSynthAudioProcessor()
     ), apvts(*this, nullptr, "Parameters", createParameters())
 #endif
 {
-    for (int i = 0; i < 4; ++i) { synth.addVoice(new SynthVoice()); }
+    for (int i = 0; i < 3; ++i) { synth.addVoice(new SynthVoice()); }
     synth.addSound(new SynthSound());
 #if defined(JUCE_ANDROID)
     jab = juce::JUCEApplicationBase::getInstance();
@@ -80,6 +80,7 @@ void TestSynthAudioProcessor::changeProgramName (int index, const juce::String& 
 
 void TestSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock) {
     synth.setCurrentPlaybackSampleRate(sampleRate);
+    filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
 
     for (int i = 0; i < synth.getNumVoices(); i++) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
@@ -130,7 +131,6 @@ void TestSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
         noteStarted = false;
     }
 
-
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -142,18 +142,17 @@ void TestSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
             auto &oscWave = *apvts.getRawParameterValue("OSC");
 
-            //auto& fmFreq = *apvts.getRawParameterValue("FMFREQ");
-            //auto& fmDepth = *apvts.getRawParameterValue("FMDEPTH");
+            auto& fmFreq = *apvts.getRawParameterValue("FMFREQ");
+            auto& fmDepth = *apvts.getRawParameterValue("FMDEPTH");
 
             auto &gain = *apvts.getRawParameterValue("GAIN");
             auto &attack = *apvts.getRawParameterValue("ATTACK");
             auto &decay = *apvts.getRawParameterValue("DECAY");
             auto &sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto &release = *apvts.getRawParameterValue("RELEASE");
-            auto& pitch = *apvts.getRawParameterValue("PITCH");
+            auto &pitch = *apvts.getRawParameterValue("PITCH");
             
             voice->getOscillator().setWaveType(oscWave);
-            //voice->getOscillator().setFmParams(fmFreq.load(), fmDepth.load());
 
             #if defined(JUCE_ANDROID) 
                 voice->setPitchBend(pitch.load());
@@ -165,7 +164,14 @@ void TestSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
-#if defined(JUCE_ANDROID)
+    auto &filterType = *apvts.getRawParameterValue("FILTER");
+    auto &cutoff = *apvts.getRawParameterValue("FILTERCUTOFF");
+    auto &resonance = *apvts.getRawParameterValue("FILTERRES");
+
+    filter.updateParameters(filterType.load(), cutoff.load(), resonance.load());
+    filter.processBlock(buffer);
+
+#if defined(JUCE_ANDROID) //find a better place to put this
     if (jab->backButtonPressed()) {
         jab->quit();
     }
@@ -193,16 +199,17 @@ juce::AudioProcessorValueTreeState::ParameterLayout TestSynthAudioProcessor::cre
 
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray({"Sin", "Saw", "Sqr"}), 1));
 
-    //params.push_back(std::make_unique<juce::AudioParameterFloat>("FMFREQ", "FM Frequency", juce::NormalisableRange<float> {0.0f, 1000.0f}, 0.0f));
-    //params.push_back(std::make_unique<juce::AudioParameterFloat>("FMDEPTH", "FM Depth", juce::NormalisableRange<float> {0.0f, 1000.0f}, 0.0f));
-
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN", "Gain", 0.0f, 1.0f, 0.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN", "Gain", 0.0f, 1.0f, 0.25f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", 0.0f, 1.0f, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", 0.0f, 1.0f, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", 0.0f, 1.0f, 1.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", 0.0f, 2.0f, 1.5f));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PITCH", "Pitch", -1.0f, 1.0f, 0.0f));
+
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTER", "Filter", juce::StringArray {"Lowpass", "Bandpass", "Highpass"}, 2));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFF", "Filter Cutoff", juce::NormalisableRange<float> {20.0f, 20000.0f, 0.1f, 0.6f}, 200.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRES", "Filter Resonance", juce::NormalisableRange<float> {1.0f, 10.0f, 0.1f}, 1.0f));
 
     return { params.begin(), params.end() };
 }

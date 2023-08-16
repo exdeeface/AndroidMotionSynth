@@ -1,6 +1,6 @@
 #pragma once
 #include <JuceHeader.h>
-#include "../PluginProcessor.h"
+#include "FilterComponent.h"
 
 class ADSRComponent : public juce::Component {
 public:
@@ -19,7 +19,10 @@ public:
 
     juce::Slider pitchSlider;
 
+    FilterComponent filterComponent;
+
 private:
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> attackSliderAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> decaySliderAttachment;

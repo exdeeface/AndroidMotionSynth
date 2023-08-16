@@ -10,6 +10,8 @@
         <GROUP id="{104C9D88-22D7-7EC6-ED67-3AB5EDCC28A2}" name="Data">
           <FILE id="uzAQb1" name="ADSRData.cpp" compile="1" resource="0" file="Source/cpp/Data/ADSRData.cpp"/>
           <FILE id="VKcToQ" name="ADSRData.h" compile="0" resource="0" file="Source/cpp/Data/ADSRData.h"/>
+          <FILE id="zZMi3C" name="FilterData.cpp" compile="1" resource="0" file="Source/cpp/Data/FilterData.cpp"/>
+          <FILE id="JJchQX" name="FilterData.h" compile="0" resource="0" file="Source/cpp/Data/FilterData.h"/>
           <FILE id="JnkGNG" name="OscData.cpp" compile="1" resource="0" file="Source/cpp/Data/OscData.cpp"/>
           <FILE id="PP1joV" name="OscData.h" compile="0" resource="0" file="Source/cpp/Data/OscData.h"/>
           <FILE id="JJXUAI" name="SynthSound.h" compile="0" resource="0" file="Source/cpp/Data/SynthSound.h"/>
@@ -20,6 +22,14 @@
           <FILE id="s8VD3x" name="ADSRComponent.cpp" compile="1" resource="0"
                 file="Source/cpp/UI/ADSRComponent.cpp"/>
           <FILE id="dDvIqa" name="ADSRComponent.h" compile="0" resource="0" file="Source/cpp/UI/ADSRComponent.h"/>
+          <FILE id="SatzwK" name="CalibrateComponent.cpp" compile="1" resource="0"
+                file="Source/cpp/UI/CalibrateComponent.cpp"/>
+          <FILE id="eOFw48" name="CalibrateComponent.h" compile="0" resource="0"
+                file="Source/cpp/UI/CalibrateComponent.h"/>
+          <FILE id="LBxsMk" name="FilterComponent.cpp" compile="1" resource="0"
+                file="Source/cpp/UI/FilterComponent.cpp"/>
+          <FILE id="xkh7we" name="FilterComponent.h" compile="0" resource="0"
+                file="Source/cpp/UI/FilterComponent.h"/>
           <FILE id="Ae6N0L" name="MainComponent.cpp" compile="1" resource="0"
                 file="Source/cpp/UI/MainComponent.cpp"/>
           <FILE id="b8kgYo" name="MainComponent.h" compile="0" resource="0" file="Source/cpp/UI/MainComponent.h"/>

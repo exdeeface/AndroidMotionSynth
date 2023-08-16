@@ -89,7 +89,7 @@ void MainComponent::timerCallback() {
         modRotZ = juce::MathConstants<float>::pi + delta;
     }
 
-    adsrComponent.filterComponent.resonanceSlider.setValue(targetZ.convertFrom0to1(sourceZ.convertTo0to1(modRotZ)));
+    adsrComponent.attackSlider.setValue(targetZ.convertFrom0to1(sourceZ.convertTo0to1(modRotZ)));
 #endif
 }
 
